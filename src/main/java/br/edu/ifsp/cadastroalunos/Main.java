@@ -38,6 +38,11 @@ public class Main {
                 case 6 -> System.out.println("Encerrando o programa...");
                 default -> System.out.println("Opção inválida!");
             }
+            // Se não for a opção de sair (6), segura a tela até o usuário teclar ENTER
+            if (op >= 1 && op <= 5) {
+                System.out.println("\nPressione ENTER para voltar ao menu...");
+                scanner.nextLine();
+            }
 
         }while(op!=6);
 
