@@ -17,8 +17,7 @@ public class AlunoDao {
         this.entityManager.persist(aluno);
     }
 
-    public void excluir(String nomeDoAluno){
-        Aluno aluno = buscarPorNome(nomeDoAluno);
+    public void excluir(Aluno aluno ){
         this.entityManager.remove(aluno);
     }
 

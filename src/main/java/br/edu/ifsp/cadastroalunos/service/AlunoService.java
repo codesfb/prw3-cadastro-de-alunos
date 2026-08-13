@@ -29,7 +29,7 @@ public class AlunoService {
             try {
                 Aluno aluno = alunoDao.buscarPorNome(nome);
                 em.getTransaction().begin();
-                alunoDao.excluir(String.valueOf(aluno));
+                alunoDao.excluir(aluno);
                 em.getTransaction().commit();
                 return true;
             } catch (NoResultException e) {
