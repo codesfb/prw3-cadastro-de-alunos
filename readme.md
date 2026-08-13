@@ -9,6 +9,7 @@
 - [ ] buscar aluno pelo nome 
 - [ ] listar alunos (com stutus aprovado)
 - fim 
+
 ---
 ## arquitetura 
 
@@ -24,8 +25,8 @@ src/
 │   │                   ├── entity/
 │   │                   │   └── Aluno.java
 │   │                   │
-│   │                   ├── repository/
-│   │                   │   └── AlunoRepository.java
+│   │                   ├── dao/
+│   │                   │   └── AlunoDao.java
 │   │                   │
 │   │                   ├── service/
 │   │                   │   └── AlunoService.java
