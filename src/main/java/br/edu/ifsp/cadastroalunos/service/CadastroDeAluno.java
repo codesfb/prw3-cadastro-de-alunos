@@ -1,6 +1,7 @@
 package br.edu.ifsp.cadastroalunos.service;
 
 import br.edu.ifsp.cadastroalunos.entity.Aluno;
+import jakarta.persistence.NoResultException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -83,7 +84,10 @@ public class CadastroDeAluno {
         String nomeBusca = scanner.nextLine();
 
         try {
+            // First, check if the student exists
+            alunoService.buscarPorNome(nomeBusca);
 
+            // If the student is found, proceed to ask for new data
             System.out.println("Digite os novos dados:");
 
             System.out.print("Digite o novo nome: ");
@@ -107,13 +111,16 @@ public class CadastroDeAluno {
             if (alunoService.alterarAluno(nomeBusca, novoNome, novoRa, novoEmail, n1, n2, n3)) {
                 System.out.println("Aluno alterado com sucesso!");
             } else {
-                System.out.println("Aluno não encontrado.");
+                // This part is less likely to be reached if the logic is correct,
+                // but it's good for robustness.
+                System.out.println("Erro ao alterar o aluno.");
             }
 
+        } catch (NoResultException e) {
+            System.out.println("Aluno não encontrado.");
         } catch (NumberFormatException e) {
             System.out.println("Erro: Nota inválida. A alteração foi cancelada.");
         }
-
     }
 
     public static void excluir(Scanner scanner, AlunoService alunoService) {
