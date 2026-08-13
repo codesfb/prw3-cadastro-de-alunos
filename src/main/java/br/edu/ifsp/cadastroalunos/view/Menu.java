@@ -10,6 +10,7 @@ public class Menu {
                 4 - Buscar aluno pelo nome
                 5 - Listar alunos (com status de aprovação)
                 6 - FIM
+                "Digite a opção desejada"
                 """);
     }
 }
