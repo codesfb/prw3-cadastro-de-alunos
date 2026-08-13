@@ -28,9 +28,6 @@ public class AlunoDao {
                 .getSingleResult();
     }
 
-    //não é nessario um metodo update interiro aqui
-    //pq ele entra em estado managed ao buscar
-    //O merge garante que o objeto seja reanexado e atualizado no banco
     public void alterar(Aluno aluno) {
         this.entityManager.merge(aluno);
     }

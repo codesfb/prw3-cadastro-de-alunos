@@ -20,19 +20,22 @@ public class CadastroDeAluno {
         System.out.print("Digite o email: ");
         String email = scanner.nextLine();
 
-        System.out.print("Digite a Nota 1: ");
-        BigDecimal nota1 = new BigDecimal(scanner.nextLine());
+        try {
+            System.out.print("Digite a Nota 1: ");
+            BigDecimal nota1 = new BigDecimal(scanner.nextLine());
 
-        System.out.print("Digite a Nota 2: ");
-        BigDecimal nota2 = new BigDecimal(scanner.nextLine());
+            System.out.print("Digite a Nota 2: ");
+            BigDecimal nota2 = new BigDecimal(scanner.nextLine());
 
-        System.out.print("Digite a Nota 3: ");
-        BigDecimal nota3 = new BigDecimal(scanner.nextLine());
+            System.out.print("Digite a Nota 3: ");
+            BigDecimal nota3 = new BigDecimal(scanner.nextLine());
 
-        Aluno aluno = new Aluno(nome, ra, email, nota1, nota2, nota3);
-        alunoService.cadastrarAluno(aluno);
-        System.out.println("Aluno cadastrado com sucesso!");
-
+            Aluno aluno = new Aluno(nome, ra, email, nota1, nota2, nota3);
+            alunoService.cadastrarAluno(aluno);
+            System.out.println("Aluno cadastrado com sucesso!");
+        } catch (NumberFormatException e) {
+            System.out.println("Erro: Nota inválida. O cadastro foi cancelado.");
+        }
     }
 
     public static void listar(AlunoService alunoService) {
@@ -67,7 +70,7 @@ public class CadastroDeAluno {
             System.out.println("Nome: " + a.getNome());
             System.out.println("Email: " + a.getEmail());
             System.out.println("RA: " + a.getRa());
-            System.out.println("Notas: " + a.getNota1() + " - " + a.getNota2() + " - " + a.getNota3()); //[cite: 3]
+            System.out.println("Notas: " + a.getNota1() + " - " + a.getNota2() + " - " + a.getNota3());
         } catch (Exception e) {
             System.out.println("Aluno não encontrado!");
         }
@@ -80,9 +83,8 @@ public class CadastroDeAluno {
         String nomeBusca = scanner.nextLine();
 
         try {
-            Aluno atual = alunoService.buscarPorNome(nomeBusca);
-            System.out.println("Aluno encontrado: " + atual.getNome() + " (RA: " + atual.getRa() + ")");
-            System.out.println("NOVOS DADOS:");
+
+            System.out.println("Digite os novos dados:");
 
             System.out.print("Digite o novo nome: ");
             String novoNome = scanner.nextLine();
@@ -102,11 +104,14 @@ public class CadastroDeAluno {
             System.out.print("Digite a nova Nota 3: ");
             BigDecimal n3 = new BigDecimal(scanner.nextLine());
 
-            alunoService.alterarAluno(nomeBusca, novoNome, novoRa, novoEmail, n1, n2, n3);
-            System.out.println("Aluno alterado com sucesso!");
+            if (alunoService.alterarAluno(nomeBusca, novoNome, novoRa, novoEmail, n1, n2, n3)) {
+                System.out.println("Aluno alterado com sucesso!");
+            } else {
+                System.out.println("Aluno não encontrado.");
+            }
 
-        } catch (Exception e) {
-            System.out.println("Aluno não encontrado!");
+        } catch (NumberFormatException e) {
+            System.out.println("Erro: Nota inválida. A alteração foi cancelada.");
         }
 
     }
