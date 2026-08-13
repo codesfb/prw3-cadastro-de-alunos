@@ -28,9 +28,9 @@ public class AlunoDao {
                 .getSingleResult();
     }
 
-    public void alterar(Aluno aluno) {
-        this.entityManager.merge(aluno);
-    }
+//    public void alterar(Aluno aluno) {
+//        this.entityManager.merge(aluno);
+//    }
 
     public List<Aluno> buscarTodos() {
         String jpql = "SELECT a FROM Aluno a";
